@@ -5,7 +5,7 @@
 ![License](https://img.shields.io/badge/license-MIT-16A34A)
 ![Media License](https://img.shields.io/badge/media-CC%20BY--NC%204.0-2563EB)
 
-> 参考先行的整片视觉导演工作流：先锁定全片职责与动效清单，再检索参考、验收关键帧并编译 MiniMax H3 提示词。
+> 参考先行的整片视觉导演工作流：先锁定全片职责与动效清单，再检索参考，逐项交付一张严格 2048×1152 的成片级参考图和一条按内容定时的 AI 视频提示词。
 
 ![参考先行动态视觉导演](reference-first-motion-director/assets/library-preview/library-cover.svg)
 
@@ -18,19 +18,19 @@ flowchart LR
     A[完整脚本 / SRT / 文案] --> B[visual-master-plan.md]
     B --> C[motion-production-queue.md]
     C --> D[精确检索本地或随包参考]
-    D --> E[clean-base 无字底板]
-    D --> F[final-composite-preview 完成态预览]
-    E --> G[MiniMax H3 动态提示词]
-    F --> H[用户验收构图与信息层级]
-    H --> G
+    D --> E[final-video-reference 成片级参考图]
+    E --> F[真实像素验收 2048×1152]
+    F --> G[按内容路由时长]
+    G --> H[AI 视频提示词]
 ```
 
 - **整片优先**：先保存完整视觉总表，避免被上一张图或最近上下文带偏。
 - **清单优先**：从总表派生动效制作清单，先让用户确认真正需要制作的内容。
 - **证据优先**：真实页面、作品、录屏和现有素材优先于抽象包装。
 - **参考可追溯**：分别绑定色彩/材质、构图/字体和运动/镜头参考，不复制品牌、原文案或完整布局。
-- **完成态验收**：文字或 UI 参与语义时，同时准备完成态预览和严格对齐的无字底板。
-- **动态再编译**：用户通过静帧后，再选择 I2VA、L2VA、FL2VA、Ref2VA 或 T2VA。
+- **单张完成图**：默认只交付一张接近成片的 `final-video-reference`，文字或 UI 需要参与构图时直接在图中完成。
+- **真实 2K 验收**：读取文件真实像素；不足时保留源图并高质量重采样到 2048×1152，内容失真则重新生成。
+- **内容决定时长**：根据事件数量、阅读负担与模型档位选择时长，再编译 I2VA、L2VA、FL2VA、Ref2VA 或 T2VA 提示词。
 
 ## 安装
 
@@ -58,7 +58,7 @@ $reference-first-motion-director
 ```text
 使用 $reference-first-motion-director 分析这份完整口播脚本。
 先保存整片视觉总表，再把需要单独制作的动效清单给我确认；
-确认后从参考库找精确案例，先生成关键静帧，再输出 H3 提示词。
+确认后从参考库找精确案例，逐项生成严格 2K 完成图，再输出按内容定时的 AI 视频提示词。
 ```
 
 ## 开箱可用的 starter library
@@ -110,9 +110,10 @@ python -X utf8 scripts/reference_library.py configure `
 |---|---|
 | `visual-master-plan.md` | 全片唯一视觉真源，记录时间、职责、证据、表现形态、制作层和状态 |
 | `motion-production-queue.md` | 从总表派生的动效制作视图，每个 `FXxx` 回链总表 |
-| `clean-base` | 无文字、无 UI 的生成模型输入底板 |
-| `final-composite-preview` | 带后期文字/UI的完成态审批图，用来验收构图与语义 |
-| H3 prompt | 标明原视频覆盖时间，并根据已批准底板编译的动态提示词 |
+| `final-video-reference` | 一张经过真实像素验收的 2048×1152 PNG 成片级参考图 |
+| AI video prompt | 标明原视频覆盖时间，并按内容关系与事件数量选择时长的视频提示词 |
+
+若具体模型要求精确首尾帧，工作流可以在内部准备与完成图空间对齐的干净输入帧；这属于模型输入要求，不增加默认用户交付数量。
 
 ## 边界
 
@@ -126,6 +127,7 @@ python -X utf8 scripts/reference_library.py configure `
 ```powershell
 python -m unittest discover -s reference-first-motion-director/scripts/tests -p "test_*.py" -v
 python reference-first-motion-director/scripts/reference_library.py status
+python reference-first-motion-director/scripts/ensure_2k.py "<source.png>" --output "<final-2K.png>"
 ```
 
 ## License
