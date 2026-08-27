@@ -1,0 +1,33 @@
+name: validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  reference-library:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.14"]
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Run reference-library tests
+        run: >-
+          python -m unittest discover
+          -s reference-first-motion-director/scripts/tests
+          -p "test_*.py"
+          -v
+      - name: Verify bundled starter library
+        run: >-
+          python reference-first-motion-director/scripts/reference_library.py
+          status

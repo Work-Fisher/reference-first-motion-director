@@ -1,0 +1,13 @@
+__pycache__/
+*.py[cod]
+*.log
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Machine-specific reference library configuration and generated outputs
+.video-studio-helper/
+visual-master-plan.md
+motion-production-queue.md
+output/

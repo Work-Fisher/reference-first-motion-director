@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="1080" viewBox="0 0 1920 1080" role="img" aria-labelledby="title desc">
+  <title id="title">Reference-first Motion Director</title>
+  <desc id="desc">Original editorial cover for the reference-first motion director skill.</desc>
+  <defs>
+    <linearGradient id="blue" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7897ff"/>
+      <stop offset="0.5" stop-color="#3458ff"/>
+      <stop offset="1" stop-color="#15236c"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0" stop-color="#4668ff" stop-opacity="0.42"/>
+      <stop offset="1" stop-color="#4668ff" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="grid" width="48" height="48" patternUnits="userSpaceOnUse">
+      <path d="M48 0H0V48" fill="none" stroke="#ffffff" stroke-opacity="0.055" stroke-width="1"/>
+    </pattern>
+    <filter id="soft" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="36"/>
+    </filter>
+  </defs>
+
+  <rect width="1920" height="1080" fill="#080a0f"/>
+  <rect width="1920" height="1080" fill="url(#grid)"/>
+  <circle cx="1510" cy="292" r="390" fill="url(#glow)" filter="url(#soft)"/>
+  <path d="M1180 -70L1960 650L1960 1080L1555 1080L910 338Z" fill="url(#blue)" opacity="0.92"/>
+  <path d="M1105 0L1920 755" fill="none" stroke="#b9c6ff" stroke-opacity="0.5" stroke-width="2"/>
+
+  <g fill="none" stroke="#f5f7ff" stroke-opacity="0.23">
+    <rect x="112" y="94" width="1696" height="892" stroke-width="1"/>
+    <path d="M112 194H1808M112 886H1808"/>
+    <path d="M1010 194V886"/>
+  </g>
+
+  <g font-family="Inter, Arial, sans-serif" fill="#f4f3ee">
+    <text x="148" y="153" font-size="22" letter-spacing="8">REFERENCE-FIRST / VISUAL SYSTEM</text>
+    <text x="1640" y="153" font-size="20" letter-spacing="4">V1.2</text>
+
+    <text x="145" y="407" font-size="142" font-weight="750" letter-spacing="-7">REFERENCE</text>
+    <text x="145" y="545" font-size="142" font-weight="750" letter-spacing="-7">FIRST</text>
+    <rect x="150" y="584" width="520" height="10" fill="#4969ff"/>
+    <text x="145" y="684" font-size="54" font-weight="650" letter-spacing="5">参考先行动态视觉导演</text>
+    <text x="148" y="742" font-size="24" fill="#9ea4b5" letter-spacing="2">PLAN THE WHOLE EDIT. BUILD ONLY WHAT MATTERS.</text>
+  </g>
+
+  <g transform="translate(1072 255)" font-family="Inter, Arial, sans-serif">
+    <path d="M34 24V564" fill="none" stroke="#dfe5ff" stroke-opacity="0.5" stroke-width="2"/>
+
+    <g transform="translate(0 0)">
+      <circle cx="34" cy="24" r="14" fill="#f4f3ee"/>
+      <text x="76" y="32" fill="#ffffff" font-size="27" font-weight="650" letter-spacing="3">SCRIPT</text>
+      <text x="76" y="64" fill="#c6cdf2" font-size="18" letter-spacing="2">INPUT / SRT / IDEA</text>
+    </g>
+    <g transform="translate(0 128)">
+      <circle cx="34" cy="24" r="14" fill="#9bb0ff"/>
+      <text x="76" y="32" fill="#ffffff" font-size="27" font-weight="650" letter-spacing="3">MASTER PLAN</text>
+      <text x="76" y="64" fill="#c6cdf2" font-size="18" letter-spacing="2">A / E / R / M / G</text>
+    </g>
+    <g transform="translate(0 256)">
+      <circle cx="34" cy="24" r="14" fill="#6f8cff"/>
+      <text x="76" y="32" fill="#ffffff" font-size="27" font-weight="650" letter-spacing="3">MOTION QUEUE</text>
+      <text x="76" y="64" fill="#c6cdf2" font-size="18" letter-spacing="2">FX01 / FX02 / FX03</text>
+    </g>
+    <g transform="translate(0 384)">
+      <circle cx="34" cy="24" r="14" fill="#4969ff"/>
+      <text x="76" y="32" fill="#ffffff" font-size="27" font-weight="650" letter-spacing="3">APPROVAL</text>
+      <text x="76" y="64" fill="#c6cdf2" font-size="18" letter-spacing="2">CLEAN BASE + FINAL COMPOSITE</text>
+    </g>
+    <g transform="translate(0 512)">
+      <circle cx="34" cy="24" r="18" fill="#080a0f" stroke="#ffffff" stroke-width="4"/>
+      <circle cx="34" cy="24" r="7" fill="#ffffff"/>
+      <text x="76" y="32" fill="#ffffff" font-size="27" font-weight="650" letter-spacing="3">H3 PROMPT</text>
+      <text x="76" y="64" fill="#dfe5ff" font-size="18" letter-spacing="2">MOTION COMPILE</text>
+    </g>
+  </g>
+
+  <g font-family="Inter, Arial, sans-serif" fill="#9ea4b5" font-size="17" letter-spacing="3">
+    <text x="148" y="948">WORK-FISHER / ORIGINAL PUBLIC ASSET</text>
+    <text x="1442" y="948">CODEX SKILL / 16:9</text>
+  </g>
+</svg>

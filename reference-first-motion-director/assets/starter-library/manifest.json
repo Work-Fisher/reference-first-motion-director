@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "library_id": "reference-first-motion-director-starter",
+  "library_version": "2.0.0",
+  "asset_count": 4,
+  "description": "随 Skill 分发的轻量原创动态参考库；无需配置个人路径即可检索和预览。",
+  "render_source": "source/render_original_starter_library.py",
+  "packaging_policy": {
+    "included": "由仓库内可复现源码绘制的几何图形、排版、色彩和运动帧，以及由这些帧编码的 MP4 与联络表。",
+    "excluded": [
+      "其他博主、网站或课程的图片、视频、页面截图与工程资产",
+      "个人参考库、原始参考 GIF、字幕、逐秒拆帧与第三方品牌素材",
+      "对外部案例的逐帧复刻、镜头描摹或可识别布局复制",
+      "工具、字体文件、缓存、依赖、可执行文件与实验输出"
+    ],
+    "use_boundary": "案例只用于学习信息关系、注意力顺序、色彩行为和运动机制；不要把它们当成固定模板或外部案例替代品。"
+  },
+  "assets": [
+    {
+      "id": "2ace7e1be575",
+      "title": "信号配色状态切换",
+      "pattern": "M02",
+      "clip": "clips/signal-palette-switch.mp4",
+      "preview": "previews/signal-palette-switch.jpg",
+      "provenance": "由随包 Python 源码以纯矢量图元逐帧确定性渲染；未使用外部图片、视频、网页截图、Logo 或第三方项目文件。"
+    },
+    {
+      "id": "365e65b2876b",
+      "title": "模块化构图组装",
+      "pattern": "M03",
+      "clip": "clips/modular-assembly-sequence.mp4",
+      "preview": "previews/modular-assembly-sequence.jpg",
+      "provenance": "由随包 Python 源码以纯矢量图元逐帧确定性渲染；未使用外部图片、视频、网页截图、Logo 或第三方项目文件。"
+    },
+    {
+      "id": "cbb79775b708",
+      "title": "编辑式章节标题栈",
+      "pattern": "M05",
+      "clip": "clips/editorial-section-stack.mp4",
+      "preview": "previews/editorial-section-stack.jpg",
+      "provenance": "由随包 Python 源码以纯矢量图元逐帧确定性渲染；未使用外部图片、视频、网页截图、Logo 或第三方项目文件。"
+    },
+    {
+      "id": "14e6e2e2636c",
+      "title": "节拍式标题钉合",
+      "pattern": "M10",
+      "clip": "clips/kinetic-title-lockup.mp4",
+      "preview": "previews/kinetic-title-lockup.jpg",
+      "provenance": "由随包 Python 源码以纯矢量图元逐帧确定性渲染；未使用外部图片、视频、网页截图、Logo 或第三方项目文件。"
+    }
+  ]
+}
