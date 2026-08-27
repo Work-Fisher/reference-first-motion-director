@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "library_id": "reference-first-motion-director-creator-library",
+  "library_version": "1.0.0",
+  "creator": "Work-Fisher",
+  "license": "CC-BY-NC-4.0",
+  "license_url": "https://creativecommons.org/licenses/by-nc/4.0/",
+  "rights_confirmation": "The repository maintainer confirmed authorship or public redistribution and CC BY-NC 4.0 relicensing rights on 2026-08-27.",
+  "asset_count": 48,
+  "image_count": 33,
+  "video_count": 15,
+  "total_media_bytes": 63381982,
+  "privacy_processing": [
+    "Published filenames use packaged SHA-256 prefixes.",
+    "Image EXIF, XMP, and editor metadata is removed by pixel re-encoding.",
+    "Video container metadata and chapters are removed without re-encoding streams.",
+    "Local absolute paths and original filenames are excluded."
+  ],
+  "index": "_library/reference-index.jsonl",
+  "overview": "overview.jpg"
+}

@@ -21,6 +21,7 @@ from typing import Any, Iterable
 CONFIG_FILENAME = "reference-first-motion-director.json"
 SKILL_ROOT = Path(__file__).resolve().parents[1]
 STARTER_LIBRARY_RELATIVE = Path("assets") / "starter-library"
+CREATOR_LIBRARY_RELATIVE = Path("assets") / "creator-reference-library"
 MEDIA_EXTENSIONS = {
     ".jpg",
     ".jpeg",
@@ -149,6 +150,14 @@ def optional_learning_root(
 
 def starter_root() -> Path:
     return SKILL_ROOT / STARTER_LIBRARY_RELATIVE
+
+
+def creator_root() -> Path:
+    return SKILL_ROOT / CREATOR_LIBRARY_RELATIVE
+
+
+def bundled_roots() -> set[Path]:
+    return {starter_root().resolve(), creator_root().resolve()}
 
 
 def write_config(
@@ -456,26 +465,34 @@ def sourced_records(root: Path, library: str, build_missing: bool = False) -> li
 
 
 def combined_records(personal_root: Path | None = None) -> list[dict[str, Any]]:
-    bundled_root = starter_root().resolve()
-    bundled = sourced_records(bundled_root, "starter")
-    if not bundled:
-        raise RuntimeError(f"内置 starter library 缺少索引或素材: {bundled_root}")
+    starter_library = starter_root().resolve()
+    creator_library = creator_root().resolve()
+    starter = sourced_records(starter_library, "starter")
+    creator = sourced_records(creator_library, "creator")
+    if not starter:
+        raise RuntimeError(f"内置 starter library 缺少索引或素材: {starter_library}")
+    if not creator:
+        raise RuntimeError(f"内置 creator library 缺少索引或素材: {creator_library}")
 
     candidates: list[dict[str, Any]] = []
-    if personal_root is not None and personal_root.resolve() != bundled_root:
+    if personal_root is not None and personal_root.resolve() not in bundled_roots():
         candidates.extend(
             sourced_records(personal_root.resolve(), "personal", build_missing=True)
         )
-    candidates.extend(bundled)
+    candidates.extend(creator)
+    candidates.extend(starter)
 
     records: list[dict[str, Any]] = []
     seen_digests: set[str] = set()
     for record in candidates:
-        digest = str(record.get("sha256") or record.get("id") or "")
-        if digest and digest in seen_digests:
+        digests = {
+            str(value)
+            for value in (record.get("sha256"), record.get("source_sha256"))
+            if value
+        }
+        if digests & seen_digests:
             continue
-        if digest:
-            seen_digests.add(digest)
+        seen_digests.update(digests)
         records.append(record)
     return records
 
@@ -507,8 +524,8 @@ def create_preview(root: Path, record: dict[str, Any], frames: int) -> dict[str,
             "prebuilt": True,
         }
 
-    if record.get("library") == "starter":
-        raise RuntimeError("内置素材缺少随包预览，不能写入只读 starter library")
+    if record.get("library") in {"starter", "creator"}:
+        raise RuntimeError("内置素材缺少随包预览，不能写入只读随包库")
 
     frames = max(4, min(frames, 30))
     duration = record.get("duration_seconds")
@@ -576,6 +593,9 @@ def compact_record(record: dict[str, Any]) -> dict[str, Any]:
             "roles",
             "segments",
             "pattern",
+            "creator",
+            "license",
+            "source_type",
             "reviewed",
         )
     }
@@ -666,13 +686,18 @@ def main(argv: list[str] | None = None) -> int:
             )
             bundled_root = starter_root().resolve()
             bundled_records = read_index(bundled_root)
+            creator_library = creator_root().resolve()
+            creator_records = read_index(creator_library)
             personal_records = read_index(personal) if personal else []
             print_json(
                 {
-                    "ready_to_search": bool(bundled_records),
+                    "ready_to_search": bool(bundled_records and creator_records),
                     "starter_library": str(bundled_root),
                     "starter_exists": bundled_root.is_dir(),
                     "indexed_starter_assets": len(bundled_records),
+                    "creator_library": str(creator_library),
+                    "creator_exists": creator_library.is_dir(),
+                    "indexed_creator_assets": len(creator_records),
                     "primary_learning_root": str(primary) if primary else None,
                     "primary_exists": primary.is_dir() if primary else False,
                     "root_index_exists": (primary / "data_structure.md").is_file()
@@ -698,8 +723,8 @@ def main(argv: list[str] | None = None) -> int:
             )
         elif args.command == "index":
             root = library_root(args.root, args.config).resolve()
-            if root == starter_root().resolve():
-                raise ValueError("内置 starter library 只读，请配置个人参考库后再索引")
+            if root in bundled_roots():
+                raise ValueError("随包参考库只读，请配置个人参考库后再索引")
             records = build_index(root)
             print_json(
                 {
@@ -729,13 +754,13 @@ def main(argv: list[str] | None = None) -> int:
             print_json(create_preview(root, record, args.frames))
         elif args.command == "add":
             root = library_root(args.root, args.config).resolve()
-            if root == starter_root().resolve():
-                raise ValueError("内置 starter library 只读，请配置个人参考库后再添加")
+            if root in bundled_roots():
+                raise ValueError("随包参考库只读，请配置个人参考库后再添加")
             print_json(add_file(root, Path(args.file)))
         elif args.command == "annotate":
             root = library_root(args.root, args.config).resolve()
-            if root == starter_root().resolve():
-                raise ValueError("内置 starter library 只读，请配置个人参考库后再标注")
+            if root in bundled_roots():
+                raise ValueError("随包参考库只读，请配置个人参考库后再标注")
             values = {
                 "summary": args.summary,
                 "tags": split_values(args.tags),

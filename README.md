@@ -3,6 +3,7 @@
 ![Codex Skill](https://img.shields.io/badge/Codex-Skill-111827)
 ![Python](https://img.shields.io/badge/Python-%3E%3D3.10-3776AB?logo=python&logoColor=white)
 ![License](https://img.shields.io/badge/license-MIT-16A34A)
+![Media License](https://img.shields.io/badge/media-CC%20BY--NC%204.0-2563EB)
 
 > 参考先行的整片视觉导演工作流：先锁定全片职责与动效清单，再检索参考、验收关键帧并编译 MiniMax H3 提示词。
 
@@ -75,6 +76,14 @@ $reference-first-motion-director
 
 正常检索和预览不需要重渲染；只有复现这些公开资产时才需要 Pillow 与 FFmpeg。
 
+## 创作者随包参考库
+
+除了 4 支纯代码 starter，Skill 还随包提供 48 项由 Work-Fisher 授权公开分发的视觉参考：33 张图片、15 支视频和逐支 12 帧联络表。无需配置本机路径即可检索色彩、构图、字体、材质和运动机制。
+
+![48 项创作者参考总览](reference-first-motion-director/assets/creator-reference-library/overview.jpg)
+
+公开副本使用哈希文件名，已移除本机路径、原始文件名和可移除元数据。媒体与描述索引采用 [`CC BY-NC 4.0`](reference-first-motion-director/assets/creator-reference-library/LICENSE.md)，完整数量、来源声明和隐私处理见 [`manifest.json`](reference-first-motion-director/assets/creator-reference-library/manifest.json)。
+
 ## 参考库命令
 
 从技能目录运行：
@@ -85,7 +94,7 @@ python -X utf8 scripts/reference_library.py search --query "章节 标题"
 python -X utf8 scripts/reference_library.py preview --asset-id cbb79775b708 --frames 12
 ```
 
-上面三条命令无需配置即可使用随包库。需要接入自己的主知识库和增量素材库时：
+上面三条命令无需配置即可使用 48 项创作者参考与 4 项 starter 案例。需要接入自己的主知识库和增量素材库时：
 
 ```powershell
 python -X utf8 scripts/reference_library.py configure `
@@ -107,7 +116,7 @@ python -X utf8 scripts/reference_library.py configure `
 
 ## 边界
 
-- 仓库不包含个人素材库、本机绝对路径、第三方网站下载素材、原始参考 GIF、字幕或逐秒拆帧。
+- 仓库不包含未授权个人素材、本机绝对路径、原始文件名、字幕或逐秒拆帧；创作者随包媒体有独立权利声明和许可证。
 - 新参考只在用户有权持有时进入个人库；保存参考不代表获得再分发权。
 - SKILL 负责整片规划、参考检索、关键静帧流程和提示词编译，不声称自动生成最终视频。
 - 随包 starter library 的逐项来源与排除边界记录在 [`manifest.json`](reference-first-motion-director/assets/starter-library/manifest.json)，完整画面可由 [`render_original_starter_library.py`](reference-first-motion-director/assets/starter-library/source/render_original_starter_library.py) 重新生成。仓库全部公开视觉资产另见 [`ASSET_PROVENANCE.md`](ASSET_PROVENANCE.md)。
@@ -121,4 +130,4 @@ python reference-first-motion-director/scripts/reference_library.py status
 
 ## License
 
-[MIT](LICENSE)
+Skill 指令与代码采用 [MIT](LICENSE)。`assets/creator-reference-library/` 中的媒体、预览、总览图和描述索引采用 [CC BY-NC 4.0](reference-first-motion-director/assets/creator-reference-library/LICENSE.md)。

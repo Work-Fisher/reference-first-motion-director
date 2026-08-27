@@ -1,12 +1,18 @@
 # 知识源地图与可信度
 
-## 三层知识源
+## 四层知识源
 
 ### 随包 starter library
 
 `assets/starter-library/`，无需配置，所有安装者可直接读取。
 
 它提供 M02、M03、M05、M10 四个轻量动效案例、联络表与人工机制标注，是可移植的最低可用基线。它不替代完整主知识库，也不代表只有这四种表现形态。详见 [starter-library.md](starter-library.md)。
+
+### 创作者随包参考库
+
+`assets/creator-reference-library/`，无需配置，所有安装者可直接读取。
+
+它提供 33 张图片、15 支视频及 48 条人工机制标注，承担具体的色彩、构图、字体、材质和运动候选。媒体由仓库维护者确认拥有公开再分发与 `CC BY-NC 4.0` 再许可权；发布副本已移除本机路径、原始文件名和可移除元数据。详见 [creator-reference-library.md](creator-reference-library.md)。
 
 ### 主知识库
 
@@ -42,7 +48,7 @@
 - **这段关系应该怎么动**：读 `motion-pattern-library.md`，再看对应 GIF contact sheet 和 09–15 号学习文档。
 - **颜色、字体、构图为什么高级**：读 `visual-dna.md`，再查看具体源图/源帧。
 - **精确时点、帧率与连续运动**：读对应学习文档、`frame-manifest.csv` 或 motion-lab 源码。
-- **没有配置本机素材库**：用 `reference_library.py` 直接检索和预览随包 starter library。
+- **没有配置本机素材库**：用 `reference_library.py` 直接检索 48 项创作者参考与 4 项 starter 案例。
 - **新参考**：配置个人入口后，用 `reference_library.py` 入库、检索和预览。
 - **某个 Motion 模板的实现**：先读 `motion-lab/README.md`，再读对应 `src/compositions/*.tsx`，不遍历整个工程。
 

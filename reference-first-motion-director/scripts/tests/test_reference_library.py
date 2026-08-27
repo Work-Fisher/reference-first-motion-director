@@ -18,10 +18,29 @@ class ReferenceLibraryTests(unittest.TestCase):
     def test_bundled_starter_library_is_searchable_without_config(self) -> None:
         records = reference_library.combined_records()
 
-        self.assertEqual(4, len(records))
-        self.assertEqual({"starter"}, {record["library"] for record in records})
+        self.assertEqual(52, len(records))
+        self.assertEqual(
+            {"creator", "starter"}, {record["library"] for record in records}
+        )
+        self.assertEqual(48, sum(record["library"] == "creator" for record in records))
+        self.assertEqual(4, sum(record["library"] == "starter" for record in records))
         matches = reference_library.search_records(records, "章节标题", False)
         self.assertEqual(["cbb79775b708"], [record["id"] for record in matches])
+
+    def test_creator_library_has_rights_metadata_and_prebuilt_video_previews(self) -> None:
+        records = reference_library.combined_records()
+        creator_records = [record for record in records if record["library"] == "creator"]
+        video = next(record for record in creator_records if record["kind"] == "video")
+
+        self.assertEqual({"CC-BY-NC-4.0"}, {record["license"] for record in creator_records})
+        self.assertEqual({"Work-Fisher"}, {record["creator"] for record in creator_records})
+        preview = reference_library.create_preview(
+            Path(video["_library_root"]), video, 24
+        )
+
+        self.assertTrue(preview["prebuilt"])
+        self.assertEqual(12, preview["frames"])
+        self.assertTrue(Path(preview["preview"]).is_file())
 
     def test_bundled_video_preview_uses_prebuilt_contact_sheet(self) -> None:
         record = reference_library.find_record(
@@ -55,8 +74,9 @@ class ReferenceLibraryTests(unittest.TestCase):
 
             records = reference_library.combined_records(personal)
 
-            self.assertEqual(5, len(records))
+            self.assertEqual(53, len(records))
             self.assertEqual("personal", records[0]["library"])
+            self.assertEqual(48, sum(record["library"] == "creator" for record in records))
             self.assertEqual(4, sum(record["library"] == "starter" for record in records))
 
     def test_external_config_supplies_machine_specific_roots(self) -> None:

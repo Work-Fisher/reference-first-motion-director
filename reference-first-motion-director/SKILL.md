@@ -9,12 +9,17 @@ description: 以本地《剪辑学习》知识库为主依据的整片视觉导�
 
 这是独立工作流。所有路由、审美判断、参考检索和动态编译都以本技能及其当前项目视觉总表为准。
 
-## 三层参考资产
+## 四层参考资产
 
 - 随包 starter library：`assets/starter-library/`。
   - 所有安装者开箱可用，包含 4 支轻量动效案例、4 张联络表和人工机制标注。
   - 只读；未配置任何本机路径时，`status`、`search`、`show`、`preview` 仍可直接工作。
   - 只收录原创代码渲染与生成/虚构资产，不包含外部网站下载、原始参考 GIF、拆帧、字幕或精确镜头复刻。
+
+- 创作者随包参考库：`assets/creator-reference-library/`。
+  - 所有安装者开箱可用，包含 33 张图片、15 支视频、15 张联络表和 48 条人工机制标注。
+  - 只读；媒体由仓库维护者确认原创或持有公开再分发与 `CC BY-NC 4.0` 再许可权。
+  - 发布副本使用哈希文件名并移除图片与视频容器元数据，不包含本机路径和原始文件名。
 
 - 主知识库：由个人配置中的 `learning_root` 或环境变量 `MOTION_LEARNING_ROOT` 指定。
   - 它提供整片剪辑规律、9 个原始 GIF、140 段/843 秒拆解、复刻手册和已验证 Motion 模板。
@@ -24,7 +29,7 @@ description: 以本地《剪辑学习》知识库为主依据的整片视觉导�
 
 机器专属绝对路径不写入 SKILL。只使用随包库无需配置；需要接入自己的主知识库或新增素材时，再运行 `scripts/reference_library.py configure`。配置默认保存在 `VIDEO_STUDIO_HELPER_HOME`，未设置时保存在用户目录的 `.video-studio-helper/reference-first-motion-director.json`。可用 `MOTION_DIRECTOR_CONFIG` 指向另一份配置。
 
-三层资产的权重、目录和检索路线见 [knowledge-map.md](references/knowledge-map.md)。随包案例说明见 [starter-library.md](references/starter-library.md)，新附件的入库规则见 [reference-library.md](references/reference-library.md)。
+四层资产的权重、目录和检索路线见 [knowledge-map.md](references/knowledge-map.md)。原创机制基线见 [starter-library.md](references/starter-library.md)，扩展随包素材见 [creator-reference-library.md](references/creator-reference-library.md)，新附件的入库规则见 [reference-library.md](references/reference-library.md)。
 
 ## 阶段 0：先判断任务尺度
 
@@ -69,7 +74,7 @@ M｜运动/镜头：文件 + 起止时间或已验证模式
 不复制：品牌、Logo、原文案、完整布局、逐帧编排
 ```
 
-参考优先级：已配置主知识库中的原始 GIF/实测拆解 > 明确已通过的本地版本 > 随包 starter library > 素材池 > 实验输出。没有配置主知识库时，从随包案例建立基础机制，再结合当前脚本和用户附件判断。文件名带 `review`、早期 `v1` 或未标明通过的输出不能自动当正面审美案例。
+参考优先级：已配置主知识库中的原始 GIF/实测拆解 > 明确已通过的本地版本 > 创作者随包参考库 > 随包 starter library > 素材池 > 实验输出。没有配置主知识库时，先在创作者库中检索具体色彩/构图/运动候选，再用 starter 案例校准基础机制。文件名带 `review`、早期 `v1` 或未标明通过的输出不能自动当正面审美案例。
 
 ## 阶段 3：先验收完成态关键静帧
 
@@ -154,4 +159,4 @@ python -X utf8 scripts/reference_library.py index
 python -X utf8 scripts/reference_library.py add --file "<incoming-reference.mp4>"
 ```
 
-前 3 条命令在未配置本机路径时直接使用随包库。主知识库已有分层 `data_structure.md` 时，检索从它导航，不递归吞入 `node_modules`、`.analysis_tools`、逐秒帧或所有实验输出。
+前 3 条命令在未配置本机路径时直接使用 48 项创作者参考与 4 项 starter 案例。主知识库已有分层 `data_structure.md` 时，检索从它导航，不递归吞入 `node_modules`、`.analysis_tools`、逐秒帧或所有实验输出。

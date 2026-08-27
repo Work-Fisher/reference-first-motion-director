@@ -1,10 +1,10 @@
 # 个人参考入口协议
 
-本文件只管理个人配置中的增量入口 `<reference-library>`。随包只读基线见 [starter-library.md](starter-library.md)；主知识库 `<learning-root>` 是分层、只读的训练资料，按 [knowledge-map.md](knowledge-map.md) 和其中的 `data_structure.md` 导航。不要把整个主知识库交给本脚本递归索引，否则会把逐秒帧、工具依赖和实验输出误当成同级案例。
+本文件只管理个人配置中的增量入口 `<reference-library>`。随包只读基线见 [starter-library.md](starter-library.md) 与 [creator-reference-library.md](creator-reference-library.md)；主知识库 `<learning-root>` 是分层、只读的训练资料，按 [knowledge-map.md](knowledge-map.md) 和其中的 `data_structure.md` 导航。不要把整个主知识库交给本脚本递归索引，否则会把逐秒帧、工具依赖和实验输出误当成同级案例。
 
 ## 目录规则
 
-不配置时，`status`、`search`、`show` 和 `preview` 会直接读取随包 starter library。需要增加自己的素材时，通过 `configure` 保存 `reference_library` 和 `learning_root`。配置默认位于 `VIDEO_STUDIO_HELPER_HOME`，未设置时位于用户目录的 `.video-studio-helper/reference-first-motion-director.json`；环境变量 `MOTION_REFERENCE_LIBRARY`、`MOTION_LEARNING_ROOT` 可以临时覆盖。脚本会在个人参考入口创建：
+不配置时，`status`、`search`、`show` 和 `preview` 会直接读取 48 项 creator library 与 4 项 starter library。需要增加自己的素材时，通过 `configure` 保存 `reference_library` 和 `learning_root`。配置默认位于 `VIDEO_STUDIO_HELPER_HOME`，未设置时位于用户目录的 `.video-studio-helper/reference-first-motion-director.json`；环境变量 `MOTION_REFERENCE_LIBRARY`、`MOTION_LEARNING_ROOT` 可以临时覆盖。脚本会在个人参考入口创建：
 
 ```text
 视频参考/
@@ -31,7 +31,7 @@ python -X utf8 scripts/reference_library.py search --unreviewed
 python -X utf8 scripts/reference_library.py add --file "<incoming-reference.mp4>"
 ```
 
-也可从任意目录用脚本绝对路径运行。检索结果的 `library` 字段会标明 `starter` 或 `personal`；个人库与随包库合并检索，内容哈希相同时个人记录优先。`index` 会递归扫描个人参考库，但跳过 `_library/`；内置库只读，不能对它执行 `index`、`add` 或 `annotate`。
+也可从任意目录用脚本绝对路径运行。检索结果的 `library` 字段会标明 `creator`、`starter` 或 `personal`；个人库与随包库合并检索，原始内容哈希相同时个人记录优先。`index` 会递归扫描个人参考库，但跳过 `_library/`；两个内置库只读，不能对它们执行 `index`、`add` 或 `annotate`。
 
 ## 加入附件
 
@@ -81,4 +81,4 @@ python -X utf8 scripts/reference_library.py annotate `
 
 ## 权利与来源
 
-只保存用户有权持有或明确提供的参考。保存不等于获得再分发权。输出只抽取色彩行为、排版关系、镜头逻辑和运动机制，不复刻 Logo、品牌文案、完整构图或逐帧序列。
+只保存用户有权持有或明确提供的参考。保存不等于获得再分发权；只有明确确认原创或持有公开再分发与指定许可证再许可权的素材，才可以经隐私清理后进入 creator 随包库。输出只抽取色彩行为、排版关系、镜头逻辑和运动机制，不复刻 Logo、品牌文案、完整构图或逐帧序列。
